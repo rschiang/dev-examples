@@ -14,26 +14,58 @@ h1 {
 	font-size: 1.5rem;
 }
 
-p::before {
-	content: attr(data-title);
-	display: block;
+#user-agent {
 	color: #666;
 	font-size: smaller;
 }
 
-/* Samples */
-p.first { font-family: system-ui; }
-p.second { font-family: -apple-system; }
-p.third { font-family: "SF Pro"; }
-p.fourth { font-family: system-ui, FontDoesNotExist; }
+.ui { font-family: system-ui; }
+.as { font-family: -apple-system; }
+
+.ui-sans { font-family: system-ui, sans-serif; }
+.as-sans { font-family: -apple-system, sans-serif; }
+
+strong { font-weight: 800; }
+th { color: #333; font-weight: 500; }
+td { padding: 1em 2em; }
 
     </style>
 </head>
 <body>
 	<h1>Text Samples</h1>
-    <p class="first" data-title="system-ui">Ramburge<b>fons</b><i>tiv</i> fîlparcè 1930 – 2076 μT. 我能端火鍋而不傷身體です。 الزجاج</p>
-    <p class="second" data-title="-apple-system">Ramburge<b>fons</b><i>tiv</i> fîlparcè 1930 – 2076 μT. 我能端火鍋而不傷身體です。 الزجاج</p>
-    <p class="third" data-title="SF Pro">Ramburge<b>fons</b><i>tiv</i> fîlparcè 1930 – 2076 μT. 我能端火鍋而不傷身體です。 الزجاج</p>
-    <p class="fourth" data-title="system-ui + non-existent font fallback">Ramburge<b>fons</b><i>tiv</i> fîlparcè 1930 – 2076 μT. 我能端火鍋而不傷身體です。 الزجاج</p>
+	<div id="user-agent"></div>
+	<table id="samples">
+		<tr>
+			<th></th>
+			<th><code>system-ui</code></th>
+			<th><code>-apple-system</code></th>
+		</tr>
+		<tr>
+			<th>sole <code>font-family</code></th>
+			<td class="ui">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+			<td class="as">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+		</tr>
+		<tr>
+			<th>with <code>lang</code> attribute</th>
+			<td class="ui" lang="en">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+			<td class="as" lang="en">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+		</tr>
+		<tr>
+			<th>with <code>sans-serif</code> as fallback</th>
+			<td class="ui-sans">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+			<td class="as-sans">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+		</tr>
+		<tr>
+			<th>with both <code>sans-serif</code> fallback<br> and <code>lang</code> attribute</th>
+			<td class="ui-sans" lang="en">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+			<td class="as-sans" lang="en">Ramburge <b>fonstiv</b><br>assurées <i>fîlparcè</i><br>1930 – 2076 μT.<br><strong>我能端火鍋，</strong><br>不傷身體です。<br>ㄅㄆㄇ الزجاج</td>
+		</tr>
+	</table>
+
+  <script>
+  	let e = document.getElementById('user-agent')
+  	let m = /Firefox\/([0-9\.]+)/.exec(navigator.userAgent)
+  	if (m !== null) e.textContent = `Tested on Firefox ${m[1]}`
+  </script>
 </body>
 </html>
